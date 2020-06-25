@@ -1,20 +1,81 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      Turismo Smash Gt
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+
+<!--menu-->
+
+
+<ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Admin</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item [routerLink]="['/nuevo']">
+        <ion-icon color="secondary" name="copy-outline"></ion-icon> Agregar nueva categoria 
+      </ion-item>
+      <ion-item [routerLink]="['/addlugar']">
+        <ion-icon  color="secondary" name="leaf-outline"></ion-icon> Agregar nuevo lugar
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <img src="./assets/logo.png"/>
+</ion-menu>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+
+
+<ion-router-outlet id="main"></ion-router-outlet>
+
+
+
+<!--Contenido-->
+
+
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item color="success">
+    <ion-icon name="chevron-forward-outline"></ion-icon> Categorias <ion-icon name="copy-outline"></ion-icon>
+    </ion-item>
+
+
+  <ion-card>
+    <ion-list *ngFor="let item of Items">
+      <ion-item button [routerLink]="['/lugares', item._id]"><ion-icon size="small" name="add-outline"></ion-icon> {{item.descripcion}}</ion-item>
+    </ion-list>
+  </ion-card>
+  
+ 
+  <img src="./assets/original.gif" style="display:block;margin:auto;"/>
+
 </ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-label>Su Ubicación Actual es:</ion-label><br>
+    <ion-label>lat: {{ origen }} lng: {{ origen2 }}</ion-label>
+  </ion-toolbar>
+</ion-footer>
+
+

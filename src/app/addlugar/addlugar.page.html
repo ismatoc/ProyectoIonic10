@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaulHref="/" color="success"></ion-back-button>
+    </ion-buttons>
+    <ion-title>agregar lugares</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openAlert()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item color="success">
+    <ion-icon name="chevron-forward-outline"></ion-icon> Crear nuevo lugar
+  </ion-item>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let lugar of lugares; let index = i">
+      <ion-item>
+        <ion-label>{{ lugar.nombre_lugar }}</ion-label>
+        <ion-checkbox [checked]="lugar.completed" slot="start"></ion-checkbox>
+      </ion-item>
+      
+      
+
+        <ion-item-option (click)="deleteLugar(lugar._id , index)" color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </ion-item-option>
+      
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
